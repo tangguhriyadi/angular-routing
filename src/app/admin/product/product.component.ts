@@ -51,7 +51,11 @@ export class ProductComponent implements OnInit {
   deleteProduct(id:number){
     var conf = confirm('delete item?')
     if(conf)
-    this.books.splice(id,1)
+    this.api.delete('books/'+this.books[id].id).subscribe(res => {
+      this.books.splice(id, 1)
+    }, error =>{
+      alert(error)
+    })
   }
   
 }
