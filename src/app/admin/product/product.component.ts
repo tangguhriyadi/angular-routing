@@ -31,9 +31,15 @@ export class ProductComponent implements OnInit {
     this.getBooks()
     
   }
+  loading:any;
   getBooks(){
+    this.loading = true
     this.api.get('books').subscribe(res => {
       this.books = res
+      this.loading = false
+    }, error => {
+      this.loading = false
+      alert('error pengambilan data')
     })
   }
   productDetail(data:any, id:number){
