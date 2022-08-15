@@ -5,12 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-
+  serverUrl:any="http://api.sunhouse.co.id/bookstore/index.php/"
   constructor(
     public http:HttpClient
   ) { }
 
-  get(){
-    return 'ok'
+  get(url:any){
+    return this.http.get(this.serverUrl + url)
   }
 }

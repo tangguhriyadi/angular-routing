@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
-
+import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -12,7 +12,8 @@ export class ProductComponent implements OnInit {
   book:any = {}
   books:any = []
   constructor(
-    public dialog:MatDialog
+    public dialog:MatDialog,
+    public api:ApiService
   ) { 
     
   }
@@ -28,26 +29,12 @@ export class ProductComponent implements OnInit {
       price:150000
     }
     this.getBooks()
+    
   }
   getBooks(){
-    this.books=[
-      {
-        title:'Tauhid Islam',
-      author:'Tangguh',
-      publisher:'qudwah',
-      year:2022,
-      isbn:'081320250390',
-      price:150000
-      },
-      {
-        title:'Tauhid Islam kaffah',
-      author:'Tangguh Riyadi',
-      publisher:'qudwah',
-      year:2022,
-      isbn:'081320250390',
-      price:170000
-      },
-    ]
+    this.api.get('books').subscribe(res => {
+      this.books = res
+    })
   }
   productDetail(data:any, id:number){
     let dialog=this.dialog.open(ProductDetailComponent, {
@@ -66,4 +53,5 @@ export class ProductComponent implements OnInit {
     if(conf)
     this.books.splice(id,1)
   }
+  
 }
