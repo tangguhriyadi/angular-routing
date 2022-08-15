@@ -20,9 +20,23 @@ export class ProductDetailComponent implements OnInit {
   }
 
   saveData(){
-    this.api.post('books', this.data).subscribe(res => {
-      this.dialogRef.close(this.data)
-    })
+    // jika ga ada data.id berarti mau nambah data
+    if(this.data.id == undefined){
+      this.api.post('books', this.data).subscribe(res => {
+        this.dialogRef.close(res)
+      }, error => {
+        alert(error)
+      })
+      // jika ada data.id berarti mau edit data
+    } else {
+      this.api.put('books/'+this.data.id, this.data).subscribe(res =>{
+        this.dialogRef.close(res)
+        console.log(res)
+      }, error=> {
+        alert(error)
+      })
+    }
+    
     
   }
 

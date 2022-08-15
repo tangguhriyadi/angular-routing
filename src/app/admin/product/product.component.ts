@@ -44,7 +44,7 @@ export class ProductComponent implements OnInit {
     dialog.afterClosed().subscribe(res => {
       if(res){
         if(id === -1) this.books.push(res);
-        else this.books[id]=res
+        else this.books[id]=data
       }
     })
   }
