@@ -13,4 +13,7 @@ export class ApiService {
   get(url:any){
     return this.http.get(this.serverUrl + url)
   }
+  post(url: any, data:any){
+    return this.http.post(this.serverUrl + url, data)
+  }
 }
