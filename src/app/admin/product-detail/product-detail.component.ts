@@ -18,13 +18,16 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  loading:any
   saveData(){
     // jika ga ada data.id berarti mau nambah data
+    this.loading= true
     if(this.data.id == undefined){
       this.api.post('books', this.data).subscribe(res => {
         this.dialogRef.close(res)
+        this.loading=false
       }, error => {
+        this.loading=false
         alert(error)
       })
       // jika ada data.id berarti mau edit data
@@ -32,7 +35,9 @@ export class ProductDetailComponent implements OnInit {
       this.api.put('books/'+this.data.id, this.data).subscribe(res =>{
         this.dialogRef.close(res)
         console.log(res)
+        this.loading=false
       }, error=> {
+        this.loading = false
         alert(error)
       })
     }
