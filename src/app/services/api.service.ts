@@ -22,4 +22,7 @@ export class ApiService {
   delete(url:any){
     return this.http.delete(this.serverUrl+url)
   }
+  register(email:any, password:any){
+    return this.http.post(this.serverUrl+'auth/register', {email:email, password:password})
+  }
 }
